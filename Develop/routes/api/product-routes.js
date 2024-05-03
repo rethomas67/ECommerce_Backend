@@ -7,6 +7,8 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 router.get("/", async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
+  //make the get calls async to retrieve the product data
+  //use the include property to get tags through product_tags
   try {
     const producData = await Product.findAll({
       include: [
@@ -37,7 +39,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 // create new product
-router.post("/", (req, res) => {
+/ create new product
+router.post("/", async (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -46,7 +49,7 @@ router.post("/", (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-  Product.create(req.body)
+  await Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {

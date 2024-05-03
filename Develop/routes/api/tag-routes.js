@@ -2,7 +2,8 @@ const router = require("express").Router();
 const { Tag, Product, ProductTag } = require("../../models");
 
 // The `/api/tags` endpoint
-
+//make the get calls async to retrieve the tag data
+//use the include property to get products through product_tags
 router.get("/", async (req, res) => {
   // find all tags
   // be sure to include its associated Product data
@@ -29,8 +30,14 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   // create a new tag
+  try {
+    const tagData = await Tag.create(req.body);
+    res.status(200).json(tagData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 router.put("/:id", (req, res) => {
