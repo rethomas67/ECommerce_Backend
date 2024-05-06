@@ -71,14 +71,46 @@ router.post("/", async (req, res) => {
     });
 });
 
-// update product
-router.put("/:id", (req, res) => {
-  // update product data
-  Product.update(req.body, {
-    where: {
-      id: req.params.id,
+/*
+await Category.update(
+    {
+      // All the fields you can update and the data attached to the request body.
+      category_name: category_name,
     },
-  })
+    {
+      // Gets the categories based on the id given in the request parameters
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((updatedCategory) => {
+      // Sends the updated book as a json response
+      res.json(updatedCategory);
+    })
+    .catch((err) => res.json(err));
+});
+*/
+
+// update product
+router.put("/:id", async (req, res) => {
+  // update product data
+  await Product.update(
+    {
+      // All the fields you can update and the data attached to the request body.
+
+      product_name: req.body.product_name,
+      price: req.body.price,
+      stock: req.body.stock,
+      category_id: req.body.category_id,
+      tagIds: req.body.tagIds,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
     .then((product) => {
       if (req.body.tagIds && req.body.tagIds.length) {
         ProductTag.findAll({
