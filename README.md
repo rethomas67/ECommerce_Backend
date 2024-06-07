@@ -14,7 +14,7 @@ N/A
 When the user name, password, and database are added to a .env file then a connection to the database is established through sequelize. When the commands for schema(source) and seed(npm run) are entered the database is created and seeded with test data. When npm start is entered then the server is started and the sequelize models are synced to the database. The API GET routes in Insomnia display JSON results. The API routes POST, PUT, DELETE create, update, and delete data in the database.
 
 Screencastify Link:
-https://app.screencastify.com/v2/manage/videos/C3bO74mt1WQD591INo83
+https://app.screencastify.com/v2/manage/videos/Ymwrbma0NrVLnzdnxU0N
 
 The link to the GitHub repository is:
 https://github.com/rethomas67/ECommerce_Backend
